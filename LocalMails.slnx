@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Src/">
     <Project Path="Src/LocalMails.App/LocalMails.App.csproj" />
+    <Project Path="Src/LocalMails.Server/LocalMails.Server.csproj" />
     <Project Path="Src/LocalMails.Shared/LocalMails.Shared.csproj" />
     <Project Path="Src/LocalMails.Web/LocalMails.Web.csproj" />
   </Folder>
