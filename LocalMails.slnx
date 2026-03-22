@@ -1,2 +1,3 @@
 <Solution>
+  <Project Path="Src/LocalMails.App/LocalMails.App.csproj" />
 </Solution>
