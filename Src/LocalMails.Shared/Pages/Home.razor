@@ -1,14 +1,156 @@
-﻿@page "/"
-@using LocalMails.Shared.Services
-@inject IFormFactor FormFactor
+@page "/"
 
-<PageTitle>Home</PageTitle>
+@using LocalMails.Server.Models
+@using LocalMails.Server.Services
+@using LocalMails.Server.Data
+@using Microsoft.Extensions.DependencyInjection
+@using Microsoft.EntityFrameworkCore
+@implements IDisposable
 
-<h1>Hello, world!</h1>
+@inject IServiceScopeFactory ScopeFactory
+@inject IEmailNotifier Notifier
 
-Welcome to your new Fluent app running on <em>@factor</em> using <em>@platform</em>.
+<PageTitle>LocalMails Inbox</PageTitle>
+
+<FluentStack Orientation="Orientation.Vertical">
+    <FluentStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
+        <FluentSpacer />
+        <FluentButton Appearance="Appearance.Stealth" OnClick="ClearInbox" IconEnd="@(new Icons.Regular.Size20.Delete())">
+            Clear Inbox
+        </FluentButton>
+    </FluentStack>
+
+    @if (selectedMessage != null)
+    {
+        <div style="display:flex; flex-direction:column; height: 100%;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid #ddd; padding-bottom: 15px; margin-bottom: 15px;">
+                <div>
+                    <h2>@selectedMessage.Subject</h2>
+                    <div style="color:var(--neutral-foreground-hint);">
+                        <strong>From:</strong> @selectedMessage.From <br/>
+                        <strong>To:</strong> @selectedMessage.To <br/>
+                        <strong>Received:</strong> @selectedMessage.ReceivedDate.ToLocalTime().ToString("g")
+                    </div>
+                </div>
+                <FluentButton Appearance="Appearance.Neutral" OnClick="() => selectedMessage = null">
+                    Back to Inbox
+                </FluentButton>
+            </div>
+            
+            <FluentTabs>
+                <FluentTab Label="HTML Body">
+                    <div style="background:#fff; color:#000; padding:15px; border-radius:8px; height: 50vh; overflow-y:auto; border: 1px solid #ccc;">
+                        @((MarkupString)selectedMessage.BodyHtml)
+                    </div>
+                </FluentTab>
+                <FluentTab Label="Plain Text">
+                    <div style="background:#f9f9f9; padding:15px; border-radius:8px; white-space:pre-wrap; height: 50vh; overflow-y:auto; font-family: monospace;">
+                        @selectedMessage.BodyText
+                    </div>
+                </FluentTab>
+            </FluentTabs>
+        </div>
+    }
+    else
+    {
+        @if (messages == null)
+        {
+            <FluentProgressRing />
+        }
+        else if (!messages.Any())
+        {
+            <div style="text-align:center; padding: 50px; color: var(--neutral-foreground-hint);">
+                <FluentIcon Value="@(new Icons.Regular.Size24.Mail())" Width="48px" />
+                <h2>Inbox is empty</h2>
+                <p>Start your application and send emails to localhost:1025. They will appear here.</p>
+            </div>
+        }
+        else
+        {
+            <FluentDataGrid Items="@messages.AsQueryable()" TGridItem="EmailMessage" OnRowClick="OnRowClicked">
+                <PropertyColumn Property="@(p => p.ReceivedDate.ToLocalTime().ToString("g"))" Title="Date" Sortable="true" />
+                <PropertyColumn Property="@(p => p.From)" Title="From" Sortable="true" />
+                <PropertyColumn Property="@(p => p.To)" Title="To" />
+                <PropertyColumn Property="@(p => p.Subject)" Title="Subject" />
+                <PropertyColumn Property="@(p => FormatBytes(p.Size))" Title="Size" />
+            </FluentDataGrid>
+        }
+    }
+</FluentStack>
 
 @code {
-    private string factor => FormFactor.GetFormFactor();
-    private string platform => FormFactor.GetPlatform();
+    private List<EmailMessage>? messages;
+    private EmailMessage? selectedMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMessagesAsync();
+
+        Notifier.OnEmailReceived += HandleNewEmail;
+        Notifier.OnEmailsCleared += HandleEmailsCleared;
+    }
+
+    private async Task LoadMessagesAsync()
+    {
+        using var scope = ScopeFactory.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        messages = await db.Messages.OrderByDescending(m => m.ReceivedDate).Take(100).ToListAsync();
+    }
+
+    private async void HandleNewEmail(EmailMessage msg)
+    {
+        await InvokeAsync(async () =>
+        {
+            if (messages != null)
+            {
+                messages.Insert(0, msg);
+                StateHasChanged();
+            }
+        });
+    }
+
+    private async void HandleEmailsCleared()
+    {
+        await InvokeAsync(() =>
+        {
+            messages?.Clear();
+            selectedMessage = null;
+            StateHasChanged();
+        });
+    }
+
+    private async Task ClearInbox()
+    {
+        using var scope = ScopeFactory.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        db.Messages.RemoveRange(db.Messages);
+        await db.SaveChangesAsync();
+
+        messages?.Clear();
+        selectedMessage = null;
+    }
+
+    private void OnRowClicked(FluentDataGridRow<EmailMessage> row)
+    {
+        selectedMessage = row.Item;
+    }
+
+    private string FormatBytes(long bytes)
+    {
+        string[] suffix = { "B", "KB", "MB", "GB" };
+        int i;
+        double dblSByte = bytes;
+        for (i = 0; i < suffix.Length && bytes >= 1024; i++, bytes /= 1024)
+        {
+            dblSByte = bytes / 1024.0;
+        }
+
+        return String.Format("{0:0.##} {1}", dblSByte, suffix[i]);
+    }
+
+    public void Dispose()
+    {
+        Notifier.OnEmailReceived -= HandleNewEmail;
+        Notifier.OnEmailsCleared -= HandleEmailsCleared;
+    }
 }

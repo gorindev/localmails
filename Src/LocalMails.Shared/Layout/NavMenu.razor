@@ -1,15 +1,21 @@
-﻿<div class="navmenu">
-    <input type="checkbox" title="Menu expand/collapse toggle" id="navmenu-toggle" class="navmenu-icon" />
-    <label for="navmenu-toggle" class="navmenu-icon"><FluentIcon Value="@(new Icons.Regular.Size20.Navigation())" Color="Color.Fill" /></label>
-    <nav class="sitenav" aria-labelledby="main-menu">
-        <FluentNavMenu Id="main-menu" Collapsible="true" Width="250" Title="Navigation menu" @bind-Expanded="expanded" CustomToggle="true">
-            <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.Home())" IconColor="Color.Accent">Home</FluentNavLink>
-            <FluentNavLink Href="counter" Icon="@(new Icons.Regular.Size20.NumberSymbolSquare())" IconColor="Color.Accent">Counter</FluentNavLink>
-            <FluentNavLink Href="weather" Icon="@(new Icons.Regular.Size20.WeatherPartlyCloudyDay())" IconColor="Color.Accent">Weather</FluentNavLink>
-        </FluentNavMenu>
-    </nav>
-</div>
+﻿<FluentAppBar Orientation="@Orientation.Vertical" Style="@(" background-color: var(--neutral-layer-2);")">
+    <FluentAppBarItem Href="/"
+                        Match="NavLinkMatch.All"
+                        IconRest="MailInbox()"
+                        IconActive="MailInbox(active: true)"
+                        Text="Home" />
+    <FluentAppBarItem Href="/settings"
+                        IconRest="SettingsIcon()"
+                        IconActive="SettingsIcon(active: true)"
+                        Text="Settings" />
+</FluentAppBar>
 
 @code {
-    private bool expanded = true;
+    private static Icon MailInbox(bool active = false) =>
+        active ? new Icons.Filled.Size24.MailInbox()
+               : new Icons.Regular.Size24.MailInbox();
+
+    private static Icon SettingsIcon(bool active = false) =>
+        active ? new Icons.Filled.Size24.Settings()
+               : new Icons.Regular.Size24.Settings();
 }
