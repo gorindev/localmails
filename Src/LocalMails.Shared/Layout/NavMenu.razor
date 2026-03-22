@@ -1,14 +1,11 @@
-﻿<FluentAppBar Orientation="@Orientation.Vertical" Style="@(" background-color: var(--neutral-layer-2);")">
-    <FluentAppBarItem Href="/"
-                        Match="NavLinkMatch.All"
-                        IconRest="MailInbox()"
-                        IconActive="MailInbox(active: true)"
-                        Text="Home" />
-    <FluentAppBarItem Href="/settings"
-                        IconRest="SettingsIcon()"
-                        IconActive="SettingsIcon(active: true)"
-                        Text="Settings" />
-</FluentAppBar>
+﻿<div style="width: 200px; background-color: var(--neutral-layer-2); padding: 10px;">
+    <a href="/">
+        Home
+    </a>
+    <a href="/settings">
+        Settings
+    </a>
+</div>
 
 @code {
     private static Icon MailInbox(bool active = false) =>

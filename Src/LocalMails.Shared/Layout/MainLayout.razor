@@ -1,19 +1,19 @@
 ﻿@inherits LayoutComponentBase
 
-<FluentLayout NavMenuTitle="LocalMails">
-    <Header>
+<div>
+    <div>
         <div style="display:flex; align-items:center;">
             <FluentIcon Value="@(new Icons.Regular.Size24.Mail())" Color="@Color.Fill" />
             <span style="font-size:1.2rem; font-weight:600; margin-left:10px;">LocalMails</span>
         </div>
-    </Header>
-    <Body>
-        <FluentStack Orientation="Orientation.Horizontal">
+    </div>
+    <div>
+        <div>
             <NavMenu />
             @Body
-        </FluentStack>
-    </Body>
-</FluentLayout>
+        </div>
+    </div>
+</div>
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.

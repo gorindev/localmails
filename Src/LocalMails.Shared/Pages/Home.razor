@@ -12,13 +12,12 @@
 
 <PageTitle>LocalMails Inbox</PageTitle>
 
-<FluentStack Orientation="Orientation.Vertical">
-    <FluentStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center">
-        <FluentSpacer />
-        <FluentButton Appearance="Appearance.Stealth" OnClick="ClearInbox" IconEnd="@(new Icons.Regular.Size20.Delete())">
+<div>
+    <div>
+        <button class="fluent-button" @onclick="ClearInbox">
             Clear Inbox
-        </FluentButton>
-    </FluentStack>
+        </button>
+    </div>
 
     @if (selectedMessage != null)
     {
@@ -32,51 +31,68 @@
                         <strong>Received:</strong> @selectedMessage.ReceivedDate.ToLocalTime().ToString("g")
                     </div>
                 </div>
-                <FluentButton Appearance="Appearance.Neutral" OnClick="() => selectedMessage = null">
+                <button @onclick="() => selectedMessage = null">
                     Back to Inbox
-                </FluentButton>
+                </button>
             </div>
             
-            <FluentTabs>
-                <FluentTab Label="HTML Body">
+            <div>
+                <div>
+                    HTML Body
                     <div style="background:#fff; color:#000; padding:15px; border-radius:8px; height: 50vh; overflow-y:auto; border: 1px solid #ccc;">
                         @((MarkupString)selectedMessage.BodyHtml)
                     </div>
-                </FluentTab>
-                <FluentTab Label="Plain Text">
+                </div>
+                <div>
+                    Plain Text
                     <div style="background:#f9f9f9; padding:15px; border-radius:8px; white-space:pre-wrap; height: 50vh; overflow-y:auto; font-family: monospace;">
                         @selectedMessage.BodyText
                     </div>
-                </FluentTab>
-            </FluentTabs>
+                </div>
+            </div>
         </div>
     }
     else
     {
         @if (messages == null)
         {
-            <FluentProgressRing />
+            <p><em>Loading...</em></p>
         }
         else if (!messages.Any())
         {
             <div style="text-align:center; padding: 50px; color: var(--neutral-foreground-hint);">
-                <FluentIcon Value="@(new Icons.Regular.Size24.Mail())" Width="48px" />
                 <h2>Inbox is empty</h2>
                 <p>Start your application and send emails to localhost:1025. They will appear here.</p>
             </div>
         }
         else
         {
-            <FluentDataGrid Items="@messages.AsQueryable()" TGridItem="EmailMessage" OnRowClick="OnRowClicked">
-                <PropertyColumn Property="@(p => p.ReceivedDate.ToLocalTime().ToString("g"))" Title="Date" Sortable="true" />
-                <PropertyColumn Property="@(p => p.From)" Title="From" Sortable="true" />
-                <PropertyColumn Property="@(p => p.To)" Title="To" />
-                <PropertyColumn Property="@(p => p.Subject)" Title="Subject" />
-                <PropertyColumn Property="@(p => FormatBytes(p.Size))" Title="Size" />
-            </FluentDataGrid>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Subject</th>
+                        <th>Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var message in messages)
+                    {
+                        <tr @onclick="() => OnRowClicked(message)">
+                            <td>@message.ReceivedDate.ToLocalTime().ToString("g")</td>
+                            <td>@message.From</td>
+                            <td>@message.To</td>
+                            <td>@message.Subject</td>
+                            <td>@FormatBytes(message.Size)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
     }
-</FluentStack>
+</div>
 
 @code {
     private List<EmailMessage>? messages;
@@ -130,9 +146,9 @@
         selectedMessage = null;
     }
 
-    private void OnRowClicked(FluentDataGridRow<EmailMessage> row)
+    private void OnRowClicked(EmailMessage message)
     {
-        selectedMessage = row.Item;
+        selectedMessage = message;
     }
 
     private string FormatBytes(long bytes)
