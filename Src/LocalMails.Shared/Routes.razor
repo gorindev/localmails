@@ -1,6 +1,14 @@
-﻿<Router AppAssembly="typeof(Layout.MainLayout).Assembly">
+<Router AppAssembly="typeof(Routes).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
         <FocusOnNavigate RouteData="routeData" Selector="h1" />
     </Found>
+    <NotFound>
+        <LayoutView Layout="typeof(Layout.MainLayout)">
+            <div style="padding: 20px; text-align: center;">
+                <h2>Page not found.</h2>
+                <p>Ensure your home page has the @@page "/" directive.</p>
+            </div>
+        </LayoutView>
+    </NotFound>
 </Router>

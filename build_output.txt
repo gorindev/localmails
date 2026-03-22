@@ -1,0 +1,24 @@
+  Determinando los proyectos que se van a restaurar...
+  Todos los proyectos est├ín actualizados para la restauraci├│n.
+  Building Tailwind CSS...
+  [3m[1m[34m├ö├½├¬[39m[22m[23m tailwindcss [34mv4.2.2[39m
+  
+  Done in [34m79ms[39m
+  LocalMails.Server -> C:\Repository\gorin\localmails\Src\LocalMails.Server\bin\Debug\net10.0\LocalMails.Server.dll
+C:\Repository\gorin\localmails\Src\LocalMails.Shared\Layout\MainLayout.razor(20,1): warning RZ10012: Found markup element with unexpected name 'BbPortalHost'. If this is intended to be a component, add a @using directive for its namespace. [C:\Repository\gorin\localmails\Src\LocalMails.Shared\LocalMails.Shared.csproj]
+C:\Repository\gorin\localmails\Src\LocalMails.Shared\_Imports.razor(14,35): error CS0234: El tipo o el nombre del espacio de nombres 'Portal' no existe en el espacio de nombres 'BlazorBlueprint.Primitives' (┬┐falta alguna referencia de ensamblado?) [C:\Repository\gorin\localmails\Src\LocalMails.Shared\LocalMails.Shared.csproj]
+C:\Repository\gorin\localmails\Src\LocalMails.Shared\_Imports.razor(14,35): error CS0234: El tipo o el nombre del espacio de nombres 'Portal' no existe en el espacio de nombres 'BlazorBlueprint.Primitives' (┬┐falta alguna referencia de ensamblado?) [C:\Repository\gorin\localmails\Src\LocalMails.Shared\LocalMails.Shared.csproj]
+C:\Repository\gorin\localmails\Src\LocalMails.Shared\_Imports.razor(14,35): error CS0234: El tipo o el nombre del espacio de nombres 'Portal' no existe en el espacio de nombres 'BlazorBlueprint.Primitives' (┬┐falta alguna referencia de ensamblado?) [C:\Repository\gorin\localmails\Src\LocalMails.Shared\LocalMails.Shared.csproj]
+C:\Repository\gorin\localmails\Src\LocalMails.Shared\_Imports.razor(14,35): error CS0234: El tipo o el nombre del espacio de nombres 'Portal' no existe en el espacio de nombres 'BlazorBlueprint.Primitives' (┬┐falta alguna referencia de ensamblado?) [C:\Repository\gorin\localmails\Src\LocalMails.Shared\LocalMails.Shared.csproj]
+
+ERROR al compilar.
+
+C:\Repository\gorin\localmails\Src\LocalMails.Shared\Layout\MainLayout.razor(20,1): warning RZ10012: Found markup element with unexpected name 'BbPortalHost'. If this is intended to be a component, add a @using directive for its namespace. [C:\Repository\gorin\localmails\Src\LocalMails.Shared\LocalMails.Shared.csproj]
+C:\Repository\gorin\localmails\Src\LocalMails.Shared\_Imports.razor(14,35): error CS0234: El tipo o el nombre del espacio de nombres 'Portal' no existe en el espacio de nombres 'BlazorBlueprint.Primitives' (┬┐falta alguna referencia de ensamblado?) [C:\Repository\gorin\localmails\Src\LocalMails.Shared\LocalMails.Shared.csproj]
+C:\Repository\gorin\localmails\Src\LocalMails.Shared\_Imports.razor(14,35): error CS0234: El tipo o el nombre del espacio de nombres 'Portal' no existe en el espacio de nombres 'BlazorBlueprint.Primitives' (┬┐falta alguna referencia de ensamblado?) [C:\Repository\gorin\localmails\Src\LocalMails.Shared\LocalMails.Shared.csproj]
+C:\Repository\gorin\localmails\Src\LocalMails.Shared\_Imports.razor(14,35): error CS0234: El tipo o el nombre del espacio de nombres 'Portal' no existe en el espacio de nombres 'BlazorBlueprint.Primitives' (┬┐falta alguna referencia de ensamblado?) [C:\Repository\gorin\localmails\Src\LocalMails.Shared\LocalMails.Shared.csproj]
+C:\Repository\gorin\localmails\Src\LocalMails.Shared\_Imports.razor(14,35): error CS0234: El tipo o el nombre del espacio de nombres 'Portal' no existe en el espacio de nombres 'BlazorBlueprint.Primitives' (┬┐falta alguna referencia de ensamblado?) [C:\Repository\gorin\localmails\Src\LocalMails.Shared\LocalMails.Shared.csproj]
+    1 Advertencia(s)
+    4 Errores
+
+Tiempo transcurrido 00:00:03.05

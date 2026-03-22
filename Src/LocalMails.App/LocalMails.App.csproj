@@ -44,6 +44,9 @@
 
     <!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
     <MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+    
+    <Content Remove="wwwroot\**" />
+    <MauiAsset Include="wwwroot\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,8 +56,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.14.0" />
-    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.14.0" />
+    <PackageReference Include="BlazorBlueprint.Components" Version="3.7.3" />
+    <PackageReference Include="BlazorBlueprint.Icons.Lucide" Version="2.0.0" />
     <ProjectReference Include="..\LocalMails.Shared\LocalMails.Shared.csproj" />
   </ItemGroup>
 

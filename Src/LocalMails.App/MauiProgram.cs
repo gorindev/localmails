@@ -5,7 +5,7 @@ using LocalMails.Shared.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.FluentUI.AspNetCore.Components;
+using BlazorBlueprint.Components;
 
 namespace LocalMails.App;
 
@@ -25,11 +25,12 @@ public static class MauiProgram
         builder.Services.AddSingleton<IFormFactor, FormFactor>();
 
         builder.Services.AddMauiBlazorWebView();
-        builder.Services.AddFluentUIComponents();
+        builder.Services.AddBlazorBlueprintComponents();
 
         // LocalMails Backend Services
         string dbPath = Path.Combine(FileSystem.AppDataDirectory, "localmails.db");
         builder.Services.AddLocalMailsServer(dbPath);
+        builder.Services.AddScoped<MailState>();
 
         #if DEBUG
         builder.Services.AddBlazorWebViewDeveloperTools();

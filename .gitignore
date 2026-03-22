@@ -416,3 +416,9 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Tailwind CSS standalone CLI binary
+tailwindcss.exe
+# Tailwind CSS generated output
+**/css/app-tailwind.css
+

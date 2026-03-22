@@ -1,0 +1,543 @@
+@page "/"
+@using LocalMails.Server.Models
+@using LocalMails.Shared.Services
+@using BlazorBlueprint.Components
+@using BlazorBlueprint.Primitives
+@using BlazorBlueprint.Icons.Lucide.Components
+@implements IDisposable
+@inject MailState MailState
+
+<PageTitle>Inbox - LocalMails</PageTitle>
+
+@* Toolbar *@
+<div class="border-b px-2 py-1 flex items-center gap-1 bg-background shrink-0">
+    <!-- <BbButton Size="ButtonSize.Small" Class="h-7 text-xs gap-1.5 shrink-0">
+        <LucideIcon Name="square-pen" class="h-3.5 w-3.5" />
+        <span class="hidden sm:inline">New Mail</span>
+    </BbButton> -->
+    <!-- <BbSeparator Orientation="SeparatorOrientation.Vertical" Class="h-5 mx-1" /> -->
+    <!-- <BbTooltip>
+        <BbTooltipTrigger>
+            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                <LucideIcon Name="archive" class="h-3.5 w-3.5" />
+            </BbButton>
+        </BbTooltipTrigger>
+        <BbTooltipContent>
+            <span>Archive</span>
+        </BbTooltipContent>
+    </BbTooltip> -->
+    <BbTooltip>
+        <BbTooltipTrigger>
+            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7" OnClick="ClearInbox">
+                <LucideIcon Name="trash-2" class="h-3.5 w-3.5" />
+            </BbButton>
+        </BbTooltipTrigger>
+        <BbTooltipContent>
+            <span>Clear Inbox</span>
+        </BbTooltipContent>
+    </BbTooltip>
+    <!-- <BbTooltip>
+        <BbTooltipTrigger>
+            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                <LucideIcon Name="reply" class="h-3.5 w-3.5" />
+            </BbButton>
+        </BbTooltipTrigger>
+        <BbTooltipContent>
+            <span>Reply</span>
+        </BbTooltipContent>
+    </BbTooltip> -->
+    @* Secondary actions - hidden on mobile *@
+    <div class="hidden sm:flex items-center gap-1">
+        <!-- <BbTooltip>
+            <BbTooltipTrigger>
+                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                    <LucideIcon Name="circle-alert" class="h-3.5 w-3.5" />
+                </BbButton>
+            </BbTooltipTrigger>
+            <BbTooltipContent>
+                <span>Report Spam</span>
+            </BbTooltipContent>
+        </BbTooltip> -->
+        <!-- <BbSeparator Orientation="SeparatorOrientation.Vertical" Class="h-5 mx-1" /> -->
+        <BbTooltip>
+            <BbTooltipTrigger>
+                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                    <LucideIcon Name="mail-open" class="h-3.5 w-3.5" />
+                </BbButton>
+            </BbTooltipTrigger>
+            <BbTooltipContent>
+                <span>Mark as Read</span>
+            </BbTooltipContent>
+        </BbTooltip>
+        <!-- <BbTooltip>
+            <BbTooltipTrigger>
+                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                    <LucideIcon Name="clock" class="h-3.5 w-3.5" />
+                </BbButton>
+            </BbTooltipTrigger>
+            <BbTooltipContent>
+                <span>Snooze</span>
+            </BbTooltipContent>
+        </BbTooltip> -->
+        <!-- <BbTooltip>
+            <BbTooltipTrigger>
+                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                    <LucideIcon Name="tag" class="h-3.5 w-3.5" />
+                </BbButton>
+            </BbTooltipTrigger>
+            <BbTooltipContent>
+                <span>Label</span>
+            </BbTooltipContent>
+        </BbTooltip> -->
+        <!-- <BbSeparator Orientation="SeparatorOrientation.Vertical" Class="h-5 mx-1" /> -->
+        <!-- <BbTooltip>
+            <BbTooltipTrigger>
+                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                    <LucideIcon Name="reply-all" class="h-3.5 w-3.5" />
+                </BbButton>
+            </BbTooltipTrigger>
+            <BbTooltipContent>
+                <span>Reply All</span>
+            </BbTooltipContent>
+        </BbTooltip> -->
+        <!-- <BbTooltip>
+            <BbTooltipTrigger>
+                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                    <LucideIcon Name="forward" class="h-3.5 w-3.5" />
+                </BbButton>
+            </BbTooltipTrigger>
+            <BbTooltipContent>
+                <span>Forward</span>
+            </BbTooltipContent>
+        </BbTooltip> -->
+    </div>
+    @* Mobile overflow menu *@
+    <div class="sm:hidden ml-auto">
+        <BbDropdownMenu>
+            <BbDropdownMenuTrigger>
+                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                    <LucideIcon Name="ellipsis-vertical" class="h-3.5 w-3.5" />
+                </BbButton>
+            </BbDropdownMenuTrigger>
+            <BbDropdownMenuContent Align="PopoverAlign.End">
+                <!-- <BbDropdownMenuItem>
+                    <LucideIcon Name="reply-all" class="mr-2 h-4 w-4" />
+                    Reply All
+                </BbDropdownMenuItem> -->
+                <!-- <BbDropdownMenuItem>
+                    <LucideIcon Name="forward" class="mr-2 h-4 w-4" />
+                    Forward
+                </BbDropdownMenuItem> -->
+                <!-- <BbDropdownMenuItem>
+                    <LucideIcon Name="circle-alert" class="mr-2 h-4 w-4" />
+                    Report Spam
+                </BbDropdownMenuItem> -->
+                <!-- <BbDropdownMenuSeparator /> -->
+                <BbDropdownMenuItem>
+                    <LucideIcon Name="mail-open" class="mr-2 h-4 w-4" />
+                    Mark as Read
+                </BbDropdownMenuItem>
+                <!-- <BbDropdownMenuItem>
+                    <LucideIcon Name="clock" class="mr-2 h-4 w-4" />
+                    Snooze
+                </BbDropdownMenuItem> -->
+                <!-- <BbDropdownMenuItem>
+                    <LucideIcon Name="tag" class="mr-2 h-4 w-4" />
+                    Label
+                </BbDropdownMenuItem> -->
+            </BbDropdownMenuContent>
+        </BbDropdownMenu>
+    </div>
+</div>
+
+@* Main Content *@
+<div class="flex-1 overflow-hidden min-h-0">
+    @* Desktop Layout (Left Rail + Resizable Panels) *@
+    <div class="hidden md:flex h-full">
+        @* Left Rail - Icon Sidebar *@
+        <div class="flex flex-col items-center py-3 gap-1 h-full bg-muted/30 border-r w-12 shrink-0">
+            <BbTooltip>
+                <BbTooltipTrigger>
+                    <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8 text-primary">
+                        <LucideIcon Name="inbox" class="h-4 w-4" />
+                    </BbButton>
+                </BbTooltipTrigger>
+                <BbTooltipContent Side="PopoverSide.Right">
+                    <span>Inbox (@FilteredMessages.Count)</span>
+                </BbTooltipContent>
+            </BbTooltip>
+            <!-- <BbTooltip>
+                <BbTooltipTrigger>
+                    <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8">
+                        <LucideIcon Name="send" class="h-4 w-4" />
+                    </BbButton>
+                </BbTooltipTrigger>
+                <BbTooltipContent Side="PopoverSide.Right">
+                    <span>Sent</span>
+                </BbTooltipContent>
+            </BbTooltip> -->
+            <!-- <BbTooltip>
+                <BbTooltipTrigger>
+                    <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8">
+                        <LucideIcon Name="file-pen" class="h-4 w-4" />
+                    </BbButton>
+                </BbTooltipTrigger>
+                <BbTooltipContent Side="PopoverSide.Right">
+                    <span>Drafts</span>
+                </BbTooltipContent>
+            </BbTooltip> -->
+            <!-- <BbTooltip>
+                <BbTooltipTrigger>
+                    <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8">
+                        <LucideIcon Name="trash-2" class="h-4 w-4" />
+                    </BbButton>
+                </BbTooltipTrigger>
+                <BbTooltipContent Side="PopoverSide.Right">
+                    <span>Trash</span>
+                </BbTooltipContent>
+            </BbTooltip> -->
+            <div class="flex-1"></div>
+            <BbTooltip>
+                <BbTooltipTrigger>
+                    <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8">
+                        <LucideIcon Name="settings" class="h-4 w-4" />
+                    </BbButton>
+                </BbTooltipTrigger>
+                <BbTooltipContent Side="PopoverSide.Right">
+                    <span>Settings</span>
+                </BbTooltipContent>
+            </BbTooltip>
+            <!-- <BbAvatar Size="AvatarSize.Small">
+                <BbAvatarFallback Class="bg-primary/10 text-primary text-xs">LM</BbAvatarFallback>
+            </BbAvatar> -->
+        </div>
+
+        @* Resizable Email List + Detail *@
+        <BbResizablePanelGroup Direction="ResizableDirection.Horizontal" Class="flex-1">
+            @* Center Panel - Email List *@
+            <BbResizablePanel DefaultSize="37" MinSize="25" MaxSize="50">
+                <div class="flex flex-col h-full">
+                    <div class="p-3 space-y-3 border-b">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-semibold">Inbox</h2>
+                            <BbBadge Variant="BadgeVariant.Secondary" Class="text-xs">@FilteredMessages.Count</BbBadge>
+                        </div>
+                        <BbTabs @bind-Value="_mailTab" Class="w-full">
+                            <BbTabsList Class="w-full h-8">
+                                <BbTabsTrigger Value="all" Class="text-xs flex-1">All Mail</BbTabsTrigger>
+                                <BbTabsTrigger Value="unread" Class="text-xs flex-1">Unread</BbTabsTrigger>
+                            </BbTabsList>
+                        </BbTabs>
+                    </div>
+                    @if (!FilteredMessages.Any())
+                    {
+                        <div class="flex-1 flex items-center justify-center p-6 text-center">
+                             <BbEmpty Title="No messages found"
+                                    Description="@(string.IsNullOrEmpty(MailState.SearchTerm) ? "Your inbox is empty." : "Try a different search term.")">
+                                <Icon>
+                                    <LucideIcon Name="inbox" class="h-10 w-10" />
+                                </Icon>
+                            </BbEmpty>
+                        </div>
+                    }
+                    else
+                    {
+                        <BbScrollArea Class="flex-1">
+                            <div class="divide-y">
+                                @foreach (var message in FilteredMessages)
+                                {
+                                    <div class="p-3 cursor-pointer transition-colors @(MailState.SelectedMessage?.Id == message.Id ? "bg-accent/50" : "hover:bg-accent/30")"
+                                         @onclick="() => MailState.SelectedMessage = message">
+                                        <div class="flex items-start gap-3">
+                                            <BbAvatar Size="AvatarSize.Small">
+                                                <BbAvatarFallback Class="bg-blue-100 text-blue-700 text-xs">@GetInitials(message.From)</BbAvatarFallback>
+                                            </BbAvatar>
+                                            <div class="flex-1 min-w-0 space-y-1">
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-sm font-semibold truncate">@message.From</span>
+                                                    <span class="text-[10px] text-muted-foreground shrink-0">@FormatDate(message.ReceivedDate)</span>
+                                                </div>
+                                                <p class="text-xs font-medium truncate">@message.Subject</p>
+                                                <p class="text-xs text-muted-foreground line-clamp-1">@message.BodyText</p>
+                                                <div class="flex gap-1.5">
+                                                    <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-blue text-tag-blue-foreground hover:bg-tag-blue">Work</BbBadge>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </BbScrollArea>
+                    }
+                </div>
+            </BbResizablePanel>
+
+            <BbResizableHandle WithHandle="true" Orientation="ResizableOrientation.Horizontal" />
+
+            @* Right Panel - Email Detail *@
+            <BbResizablePanel DefaultSize="63" MinSize="50">
+                <div class="flex flex-col h-full">
+                    @if (MailState.SelectedMessage != null)
+                    {
+                        @* Email Header *@
+                        <div class="p-4 border-b space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <!-- <BbAvatar>
+                                        <BbAvatarFallback Class="bg-blue-100 text-blue-700">@GetInitials(MailState.SelectedMessage.From)</BbAvatarFallback>
+                                    </BbAvatar> -->
+                                    <div>
+                                        <p class="text-sm font-semibold">@MailState.SelectedMessage.From</p>
+                                        <p class="text-xs text-muted-foreground">To: @MailState.SelectedMessage.To</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-muted-foreground">@MailState.SelectedMessage.ReceivedDate.ToLocalTime().ToString("g")</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <h3 class="text-base font-semibold">@MailState.SelectedMessage.Subject</h3>
+                                <div class="flex items-center gap-1">
+                                    <!-- <BbButtonGroup>
+                                        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                                            <LucideIcon Name="reply" class="h-3.5 w-3.5" />
+                                        </BbButton>
+                                        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                                            <LucideIcon Name="forward" class="h-3.5 w-3.5" />
+                                        </BbButton>
+                                        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                                            <LucideIcon Name="archive" class="h-3.5 w-3.5" />
+                                        </BbButton>
+                                    </BbButtonGroup> -->
+                                    <BbDropdownMenu>
+                                        <BbDropdownMenuTrigger>
+                                            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                                                <LucideIcon Name="ellipsis-vertical" class="h-3.5 w-3.5" />
+                                            </BbButton>
+                                        </BbDropdownMenuTrigger>
+                                        <BbDropdownMenuContent Align="PopoverAlign.End">
+                                            <!-- <BbDropdownMenuItem>
+                                                <LucideIcon Name="star" class="mr-2 h-4 w-4" />
+                                                Star
+                                            </BbDropdownMenuItem> -->
+                                            <!-- <BbDropdownMenuItem>
+                                                <LucideIcon Name="tag" class="mr-2 h-4 w-4" />
+                                                Add Label
+                                            </BbDropdownMenuItem> -->
+                                            <!-- <BbDropdownMenuSeparator /> -->
+                                            <BbDropdownMenuItem Class="text-destructive focus:text-destructive">
+                                                <LucideIcon Name="trash-2" class="mr-2 h-4 w-4" />
+                                                Delete
+                                            </BbDropdownMenuItem>
+                                        </BbDropdownMenuContent>
+                                    </BbDropdownMenu>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* Email Body *@
+                        <BbScrollArea Class="flex-1">
+                            <div class="p-4 space-y-4">
+                                @if (!string.IsNullOrEmpty(MailState.SelectedMessage.BodyHtml))
+                                {
+                                    <div class="bg-white text-black p-4 rounded-md border shadow-sm prose prose-sm max-w-none">
+                                        @((MarkupString)MailState.SelectedMessage.BodyHtml)
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="whitespace-pre-wrap font-sans text-sm leading-relaxed p-4 bg-muted/20 rounded-md border">
+                                        @MailState.SelectedMessage.BodyText
+                                    </div>
+                                }
+                            </div>
+                        </BbScrollArea>
+                    }
+                    else
+                    {
+                        <div class="flex-1 flex flex-col items-center justify-center text-muted-foreground p-12">
+                            <LucideIcon Name="mail" class="h-12 w-12 mb-4 opacity-20" />
+                            <p>Select a message to read</p>
+                        </div>
+                    }
+                </div>
+            </BbResizablePanel>
+        </BbResizablePanelGroup>
+    </div>
+
+    @* Mobile Email View (single panel) *@
+    <div class="flex-1 flex flex-col md:hidden overflow-hidden min-h-0 h-full">
+        @* Mobile Folder Navigation *@
+        <div class="flex items-center border-b bg-muted/30 px-1 shrink-0 overflow-x-auto scrollbar-hidden">
+            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Small" Class="h-9 text-xs gap-1.5 text-primary shrink-0">
+                <LucideIcon Name="inbox" class="h-3.5 w-3.5" />
+                Inbox
+            </BbButton>
+            <!-- <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Small" Class="h-9 text-xs gap-1.5 shrink-0">
+                <LucideIcon Name="send" class="h-3.5 w-3.5" />
+                Sent
+            </BbButton> -->
+            <!-- <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Small" Class="h-9 text-xs gap-1.5 shrink-0">
+                <LucideIcon Name="file-pen" class="h-3.5 w-3.5" />
+                Drafts
+            </BbButton> -->
+            <!-- <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Small" Class="h-9 text-xs gap-1.5 shrink-0">
+                <LucideIcon Name="trash-2" class="h-3.5 w-3.5" />
+                Trash
+            </BbButton> -->
+            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Small" Class="h-9 text-xs gap-1.5 shrink-0">
+                <LucideIcon Name="settings" class="h-3.5 w-3.5" />
+                Settings
+            </BbButton>
+        </div>
+
+        @if (!_mobileShowDetail || MailState.SelectedMessage == null)
+        {
+            @* Mobile Email List *@
+            <div class="flex flex-col flex-1 min-h-0">
+                <div class="p-3 space-y-3 border-b shrink-0">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-semibold">Inbox</h2>
+                        <BbBadge Variant="BadgeVariant.Secondary" Class="text-xs">@FilteredMessages.Count</BbBadge>
+                    </div>
+                    <BbTabs @bind-Value="_mailTab" Class="w-full">
+                        <BbTabsList Class="w-full h-8">
+                            <BbTabsTrigger Value="all" Class="text-xs flex-1">All Mail</BbTabsTrigger>
+                            <BbTabsTrigger Value="unread" Class="text-xs flex-1">Unread</BbTabsTrigger>
+                        </BbTabsList>
+                    </BbTabs>
+                </div>
+                
+                <div class="flex-1 min-h-0 overflow-y-auto">
+                    <div class="divide-y">
+                        @foreach (var message in FilteredMessages)
+                        {
+                            <div class="p-3 @(MailState.SelectedMessage?.Id == message.Id ? "bg-accent/50" : "")" 
+                                 @onclick="() => SelectMessage(message)">
+                                <div class="flex items-start gap-3">
+                                    <BbAvatar Size="AvatarSize.Small">
+                                        <BbAvatarFallback Class="bg-blue-100 text-blue-700 text-xs">@GetInitials(message.From)</BbAvatarFallback>
+                                    </BbAvatar>
+                                    <div class="flex-1 min-w-0 space-y-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm font-semibold truncate">@message.From</span>
+                                            <span class="text-[10px] text-muted-foreground shrink-0">@FormatDate(message.ReceivedDate)</span>
+                                        </div>
+                                        <p class="text-xs font-medium truncate">@message.Subject</p>
+                                        <p class="text-xs text-muted-foreground line-clamp-1">@message.BodyText</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            @* Mobile Email Detail *@
+            <div class="flex flex-col flex-1 min-h-0">
+                <div class="p-3 border-b space-y-3 shrink-0">
+                    <div class="flex items-center gap-2">
+                        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8" @onclick="() => _mobileShowDetail = false">
+                            <LucideIcon Name="arrow-left" class="h-4 w-4" />
+                        </BbButton>
+                        <div class="flex items-center gap-3 flex-1 min-w-0">
+                            <!-- <BbAvatar Size="AvatarSize.Small">
+                                <BbAvatarFallback Class="bg-blue-100 text-blue-700 text-xs">@GetInitials(MailState.SelectedMessage.From)</BbAvatarFallback>
+                            </BbAvatar> -->
+                            <div class="min-w-0">
+                                <p class="text-sm font-semibold truncate">@MailState.SelectedMessage.From</p>
+                                <p class="text-[10px] text-muted-foreground truncate">To: @MailState.SelectedMessage.To</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 shrink-0">
+                            <!-- <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                                <LucideIcon Name="reply" class="h-3.5 w-3.5" />
+                            </BbButton> -->
+                            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                                <LucideIcon Name="trash-2" class="h-3.5 w-3.5" />
+                            </BbButton>
+                        </div>
+                    </div>
+                    <h3 class="text-base font-semibold">@MailState.SelectedMessage.Subject</h3>
+                </div>
+                <div class="flex-1 min-h-0 overflow-y-auto">
+                    <div class="p-4 space-y-4">
+                        @if (!string.IsNullOrEmpty(MailState.SelectedMessage.BodyHtml))
+                        {
+                            <div class="bg-white text-black p-4 rounded-md border shadow-sm prose prose-sm max-w-none">
+                                @((MarkupString)MailState.SelectedMessage.BodyHtml)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="whitespace-pre-wrap font-sans text-sm leading-relaxed p-4 bg-muted/20 rounded-md border">
+                                @MailState.SelectedMessage.BodyText
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private string _mailTab = "all";
+    private bool _mobileShowDetail;
+
+    protected override async Task OnInitializedAsync()
+    {
+        MailState.OnChanged += OnStateChanged;
+        await MailState.LoadMessagesAsync();
+        
+        // Auto-select first message if any
+        if (MailState.Messages.Any() && MailState.SelectedMessage == null)
+        {
+            MailState.SelectedMessage = MailState.Messages.First();
+        }
+    }
+
+    private async void OnStateChanged()
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private List<EmailMessage> FilteredMessages => MailState.Messages
+        .Where(m => string.IsNullOrEmpty(MailState.SearchTerm) || 
+                   m.Subject.Contains(MailState.SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                   m.From.Contains(MailState.SearchTerm, StringComparison.OrdinalIgnoreCase) ||
+                   m.BodyText.Contains(MailState.SearchTerm, StringComparison.OrdinalIgnoreCase))
+        .ToList();
+
+    private void SelectMessage(EmailMessage message)
+    {
+        MailState.SelectedMessage = message;
+        _mobileShowDetail = true;
+    }
+
+    private async Task ClearInbox()
+    {
+        await MailState.ClearInboxAsync();
+    }
+
+    private string GetInitials(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name)) return "??";
+        var parts = name.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        if (parts.Length == 1) return parts[0][..Math.Min(2, parts[0].Length)].ToUpper();
+        return (parts[0][0].ToString() + parts[1][0].ToString()).ToUpper();
+    }
+
+    private string FormatDate(DateTime date)
+    {
+        var local = date.ToLocalTime();
+        if (local.Date == DateTime.Today) return local.ToString("t");
+        if (local.Date == DateTime.Today.AddDays(-1)) return "Yesterday";
+        return local.ToString("MMM d");
+    }
+
+    public void Dispose()
+    {
+        MailState.OnChanged -= OnStateChanged;
+    }
+}

@@ -12,12 +12,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.5" />
-    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.14.0" />
-    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.14.0" />
+    <PackageReference Include="BlazorBlueprint.Components" Version="3.7.3" />
+    <PackageReference Include="BlazorBlueprint.Icons.Lucide" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LocalMails.Server\LocalMails.Server.csproj" />
   </ItemGroup>
+
+  <Target Name="BuildTailwindCSS" BeforeTargets="BeforeBuild">
+    <Message Text="Building Tailwind CSS..." Importance="high" />
+    <Exec Command="$(MSBuildThisFileDirectory)tailwindcss.exe -i wwwroot/css/app-input.css -o wwwroot/css/app-tailwind.css" WorkingDirectory="$(MSBuildThisFileDirectory)" />
+  </Target>
 
 </Project>
