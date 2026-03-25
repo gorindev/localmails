@@ -5,69 +5,9 @@
 <div class="flex flex-col h-dvh bg-background">
 @* Top Menu Bar *@
 <div class="border-b px-2 py-1 flex items-center justify-between bg-background shrink-0">
-    <BbMenubar Class="border-none shadow-none p-0 h-8 hidden md:flex">
-        <BbMenubarMenu>
-            <BbMenubarTrigger Class="text-xs px-2 py-1">File</BbMenubarTrigger>
-            <BbMenubarContent>
-                <BbMenubarItem>
-                    <LucideIcon Name="plus" class="mr-2 h-4 w-4"/>
-                    New Message
-                    <BbMenubarShortcut>
-                        <BbKbd Size="KbdSize.Small">Ctrl+N</BbKbd>
-                    </BbMenubarShortcut>
-                </BbMenubarItem>
-                <BbMenubarItem>
-                    <LucideIcon Name="printer" class="mr-2 h-4 w-4"/>
-                    Print
-                    <BbMenubarShortcut>
-                        <BbKbd Size="KbdSize.Small">Ctrl+P</BbKbd>
-                    </BbMenubarShortcut>
-                </BbMenubarItem>
-                <BbMenubarSeparator/>
-                <BbMenubarItem>
-                    <LucideIcon Name="log-out" class="mr-2 h-4 w-4"/>
-                    Quit
-                </BbMenubarItem>
-            </BbMenubarContent>
-        </BbMenubarMenu>
-        <BbMenubarMenu>
-            <BbMenubarTrigger Class="text-xs px-2 py-1">Edit</BbMenubarTrigger>
-            <BbMenubarContent>
-                <BbMenubarItem>
-                    Undo
-                    <BbMenubarShortcut>
-                        <BbKbd Size="KbdSize.Small">Ctrl+Z</BbKbd>
-                    </BbMenubarShortcut>
-                </BbMenubarItem>
-                <BbMenubarItem>
-                    Redo
-                    <BbMenubarShortcut>
-                        <BbKbd Size="KbdSize.Small">Ctrl+Y</BbKbd>
-                    </BbMenubarShortcut>
-                </BbMenubarItem>
-                <BbMenubarSeparator/>
-                <BbMenubarItem>
-                    Select All
-                    <BbMenubarShortcut>
-                        <BbKbd Size="KbdSize.Small">Ctrl+A</BbKbd>
-                    </BbMenubarShortcut>
-                </BbMenubarItem>
-            </BbMenubarContent>
-        </BbMenubarMenu>
-        <BbMenubarMenu>
-            <BbMenubarTrigger Class="text-xs px-2 py-1">View</BbMenubarTrigger>
-            <BbMenubarContent>
-                <BbMenubarCheckboxItem Checked="true">Compact</BbMenubarCheckboxItem>
-                <BbMenubarCheckboxItem>Show Preview</BbMenubarCheckboxItem>
-                <BbMenubarSeparator/>
-                <BbMenubarLabel>Density</BbMenubarLabel>
-                <BbMenubarItem Inset="true">Comfortable</BbMenubarItem>
-                <BbMenubarItem Inset="true">Compact</BbMenubarItem>
-            </BbMenubarContent>
-        </BbMenubarMenu>
-    </BbMenubar>
     <div class="flex items-center gap-2 md:hidden">
-        <span class="text-sm font-semibold">Mail</span>
+        <LucideIcon Name="mail" class="h-4 w-4"/>
+        <span class="text-sm font-semibold">LocalMails</span>
     </div>
     <BbInputGroup Class="w-36 sm:w-48 lg:w-64">
         <BbInputGroupAddon Align="InputGroupAlign.InlineStart">
@@ -81,19 +21,9 @@
 <div class="border-b px-2 py-1 flex items-center gap-1 bg-background shrink-0">
     <BbButton Size="ButtonSize.Small" Class="h-7 text-xs gap-1.5 shrink-0">
         <LucideIcon Name="square-pen" class="h-3.5 w-3.5"/>
-        <span class="hidden sm:inline">New Mail</span>
+        <span class="hidden sm:inline">New Template</span>
     </BbButton>
     <BbSeparator Orientation="SeparatorOrientation.Vertical" Class="h-5 mx-1"/>
-    <BbTooltip>
-        <BbTooltipTrigger>
-            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                <LucideIcon Name="archive" class="h-3.5 w-3.5"/>
-            </BbButton>
-        </BbTooltipTrigger>
-        <BbTooltipContent>
-            <span>Archive</span>
-        </BbTooltipContent>
-    </BbTooltip>
     <BbTooltip>
         <BbTooltipTrigger>
             <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
@@ -104,29 +34,8 @@
             <span>Delete</span>
         </BbTooltipContent>
     </BbTooltip>
-    <BbTooltip>
-        <BbTooltipTrigger>
-            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                <LucideIcon Name="reply" class="h-3.5 w-3.5"/>
-            </BbButton>
-        </BbTooltipTrigger>
-        <BbTooltipContent>
-            <span>Reply</span>
-        </BbTooltipContent>
-    </BbTooltip>
     @* Secondary actions - hidden on mobile *@
     <div class="hidden sm:flex items-center gap-1">
-        <BbTooltip>
-            <BbTooltipTrigger>
-                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                    <LucideIcon Name="circle-alert" class="h-3.5 w-3.5"/>
-                </BbButton>
-            </BbTooltipTrigger>
-            <BbTooltipContent>
-                <span>Report Spam</span>
-            </BbTooltipContent>
-        </BbTooltip>
-        <BbSeparator Orientation="SeparatorOrientation.Vertical" Class="h-5 mx-1"/>
         <BbTooltip>
             <BbTooltipTrigger>
                 <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
@@ -140,42 +49,11 @@
         <BbTooltip>
             <BbTooltipTrigger>
                 <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                    <LucideIcon Name="clock" class="h-3.5 w-3.5"/>
+                    <LucideIcon Name="mail" class="h-3.5 w-3.5"/>
                 </BbButton>
             </BbTooltipTrigger>
             <BbTooltipContent>
-                <span>Snooze</span>
-            </BbTooltipContent>
-        </BbTooltip>
-        <BbTooltip>
-            <BbTooltipTrigger>
-                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                    <LucideIcon Name="tag" class="h-3.5 w-3.5"/>
-                </BbButton>
-            </BbTooltipTrigger>
-            <BbTooltipContent>
-                <span>Label</span>
-            </BbTooltipContent>
-        </BbTooltip>
-        <BbSeparator Orientation="SeparatorOrientation.Vertical" Class="h-5 mx-1"/>
-        <BbTooltip>
-            <BbTooltipTrigger>
-                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                    <LucideIcon Name="reply-all" class="h-3.5 w-3.5"/>
-                </BbButton>
-            </BbTooltipTrigger>
-            <BbTooltipContent>
-                <span>Reply All</span>
-            </BbTooltipContent>
-        </BbTooltip>
-        <BbTooltip>
-            <BbTooltipTrigger>
-                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                    <LucideIcon Name="forward" class="h-3.5 w-3.5"/>
-                </BbButton>
-            </BbTooltipTrigger>
-            <BbTooltipContent>
-                <span>Forward</span>
+                <span>Mark as Unread</span>
             </BbTooltipContent>
         </BbTooltip>
     </div>
@@ -189,29 +67,12 @@
             </BbDropdownMenuTrigger>
             <BbDropdownMenuContent Align="PopoverAlign.End">
                 <BbDropdownMenuItem>
-                    <LucideIcon Name="reply-all" class="mr-2 h-4 w-4"/>
-                    Reply All
-                </BbDropdownMenuItem>
-                <BbDropdownMenuItem>
-                    <LucideIcon Name="forward" class="mr-2 h-4 w-4"/>
-                    Forward
-                </BbDropdownMenuItem>
-                <BbDropdownMenuItem>
-                    <LucideIcon Name="circle-alert" class="mr-2 h-4 w-4"/>
-                    Report Spam
-                </BbDropdownMenuItem>
-                <BbDropdownMenuSeparator/>
-                <BbDropdownMenuItem>
                     <LucideIcon Name="mail-open" class="mr-2 h-4 w-4"/>
                     Mark as Read
                 </BbDropdownMenuItem>
                 <BbDropdownMenuItem>
-                    <LucideIcon Name="clock" class="mr-2 h-4 w-4"/>
-                    Snooze
-                </BbDropdownMenuItem>
-                <BbDropdownMenuItem>
-                    <LucideIcon Name="tag" class="mr-2 h-4 w-4"/>
-                    Label
+                    <LucideIcon Name="mail" class="mr-2 h-4 w-4"/>
+                    Mark as Unread
                 </BbDropdownMenuItem>
             </BbDropdownMenuContent>
         </BbDropdownMenu>
@@ -222,294 +83,213 @@
 <div class="flex-1 overflow-hidden min-h-0">
 @* Desktop Layout (Left Rail + Resizable Panels) *@
 <div class="hidden md:flex h-full">
-@* Left Rail - Icon Sidebar *@
-<div class="flex flex-col items-center py-3 gap-1 h-full bg-muted/30 border-r w-12 shrink-0">
-    <BbTooltip>
-        <BbTooltipTrigger>
-            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8 text-primary">
-                <LucideIcon Name="inbox" class="h-4 w-4"/>
-            </BbButton>
-        </BbTooltipTrigger>
-        <BbTooltipContent Side="PopoverSide.Right">
-            <span>Inbox (12)</span>
-        </BbTooltipContent>
-    </BbTooltip>
-    <BbTooltip>
-        <BbTooltipTrigger>
-            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8">
-                <LucideIcon Name="send" class="h-4 w-4"/>
-            </BbButton>
-        </BbTooltipTrigger>
-        <BbTooltipContent Side="PopoverSide.Right">
-            <span>Sent</span>
-        </BbTooltipContent>
-    </BbTooltip>
-    <BbTooltip>
-        <BbTooltipTrigger>
-            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8">
-                <LucideIcon Name="file-pen" class="h-4 w-4"/>
-            </BbButton>
-        </BbTooltipTrigger>
-        <BbTooltipContent Side="PopoverSide.Right">
-            <span>Drafts</span>
-        </BbTooltipContent>
-    </BbTooltip>
-    <BbTooltip>
-        <BbTooltipTrigger>
-            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8">
-                <LucideIcon Name="trash-2" class="h-4 w-4"/>
-            </BbButton>
-        </BbTooltipTrigger>
-        <BbTooltipContent Side="PopoverSide.Right">
-            <span>Trash</span>
-        </BbTooltipContent>
-    </BbTooltip>
-    <div class="flex-1"></div>
-    <BbAvatar Size="AvatarSize.Small">
-        <BbAvatarFallback Class="bg-primary/10 text-primary text-xs">AJ</BbAvatarFallback>
-    </BbAvatar>
-</div>
-
-@* Resizable Email List + Detail *@
-<BbResizablePanelGroup Direction="ResizableDirection.Horizontal" Class="flex-1">
-@* Center Panel - Email List *@
-<BbResizablePanel DefaultSize="37" MinSize="25" MaxSize="50">
-    <div class="flex flex-col h-full">
-        <div class="p-3 space-y-3 border-b">
-            <div class="flex items-center justify-between">
-                <h2 class="text-lg font-semibold">Inbox</h2>
-                <BbBadge Variant="BadgeVariant.Secondary" Class="text-xs">12</BbBadge>
-            </div>
-            <BbTabs @bind-Value="_mailTab" Class="w-full">
-                <BbTabsList Class="w-full h-8">
-                    <BbTabsTrigger Value="all" Class="text-xs flex-1">All Mail</BbTabsTrigger>
-                    <BbTabsTrigger Value="unread" Class="text-xs flex-1">Unread</BbTabsTrigger>
-                </BbTabsList>
-            </BbTabs>
-        </div>
-        @if (_mailTab == "unread")
-        {
-            <div class="flex-1 flex items-center justify-center">
-                <BbEmpty Title="All caught up!"
-                         Description="You have no unread messages. Enjoy the zen.">
-                    <Icon>
-                        <LucideIcon Name="mail-check" class="h-10 w-10"/>
-                    </Icon>
-                </BbEmpty>
-            </div>
-        }
-        else
-        {
-            <BbScrollArea Class="flex-1">
-                <div class="divide-y">
-                    @* Email 1 - Selected *@
-                    <div class="p-3 bg-accent/50 cursor-pointer">
-                        <div class="flex items-start gap-3">
-                            <BbAvatar Size="AvatarSize.Small">
-                                <BbAvatarFallback Class="bg-blue-100 text-blue-700 text-xs">SC</BbAvatarFallback>
-                            </BbAvatar>
-                            <div class="flex-1 min-w-0 space-y-1">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm font-semibold truncate">Sarah Chen</span>
-                                    <span class="text-[10px] text-muted-foreground shrink-0">10:32 AM</span>
-                                </div>
-                                <p class="text-xs font-medium truncate">Q4 Revenue Report - Final Draft</p>
-                                <p class="text-xs text-muted-foreground line-clamp-1">Hi team, please find attached the final draft of the Q4 revenue report...</p>
-                                <div class="flex gap-1.5">
-                                    <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-blue text-tag-blue-foreground hover:bg-tag-blue">Work</BbBadge>
-                                    <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-red text-tag-red-foreground hover:bg-tag-red">Important</BbBadge>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    @* Email 2 *@
-                    <div class="p-3 hover:bg-accent/30 cursor-pointer transition-colors">
-                        <div class="flex items-start gap-3">
-                            <BbAvatar Size="AvatarSize.Small">
-                                <BbAvatarFallback Class="bg-green-100 text-green-700 text-xs">MR</BbAvatarFallback>
-                            </BbAvatar>
-                            <div class="flex-1 min-w-0 space-y-1">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm font-semibold truncate">Marcus Rivera</span>
-                                    <span class="text-[10px] text-muted-foreground shrink-0">9:15 AM</span>
-                                </div>
-                                <p class="text-xs font-medium truncate">Sprint Planning - Action Items</p>
-                                <p class="text-xs text-muted-foreground line-clamp-1">Following up on our sprint planning meeting, here are the key action items...</p>
-                                <div class="flex gap-1.5">
-                                    <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-blue text-tag-blue-foreground hover:bg-tag-blue">Work</BbBadge>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    @* Email 3 *@
-                    <div class="p-3 hover:bg-accent/30 cursor-pointer transition-colors">
-                        <div class="flex items-start gap-3">
-                            <BbAvatar Size="AvatarSize.Small">
-                                <BbAvatarFallback Class="bg-purple-100 text-purple-700 text-xs">EW</BbAvatarFallback>
-                            </BbAvatar>
-                            <div class="flex-1 min-w-0 space-y-1">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm truncate">Emma Wilson</span>
-                                    <span class="text-[10px] text-muted-foreground shrink-0">Yesterday</span>
-                                </div>
-                                <p class="text-xs truncate">Design Review Feedback</p>
-                                <p class="text-xs text-muted-foreground line-clamp-1">Great work on the new designs! I have a few suggestions for the landing page...</p>
-                                <div class="flex gap-1.5">
-                                    <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-violet text-tag-violet-foreground hover:bg-tag-violet">Personal</BbBadge>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    @* Email 4 *@
-                    <div class="p-3 hover:bg-accent/30 cursor-pointer transition-colors">
-                        <div class="flex items-start gap-3">
-                            <BbAvatar Size="AvatarSize.Small">
-                                <BbAvatarFallback Class="bg-amber-100 text-amber-700 text-xs">JK</BbAvatarFallback>
-                            </BbAvatar>
-                            <div class="flex-1 min-w-0 space-y-1">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm truncate">James Kim</span>
-                                    <span class="text-[10px] text-muted-foreground shrink-0">Yesterday</span>
-                                </div>
-                                <p class="text-xs truncate">Team Lunch - Friday</p>
-                                <p class="text-xs text-muted-foreground line-clamp-1">Hey everyone! Let's do a team lunch this Friday. I was thinking Italian...</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    @* Skeleton Loading Items *@
-                    <div class="p-3">
-                        <div class="flex items-start gap-3">
-                            <BbSkeleton Shape="SkeletonShape.Circular" Class="h-8 w-8"/>
-                            <div class="flex-1 space-y-2">
-                                <BbSkeleton Class="h-3 w-[120px]"/>
-                                <BbSkeleton Class="h-3 w-[200px]"/>
-                                <BbSkeleton Class="h-3 w-[160px]"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-3">
-                        <div class="flex items-start gap-3">
-                            <BbSkeleton Shape="SkeletonShape.Circular" Class="h-8 w-8"/>
-                            <div class="flex-1 space-y-2">
-                                <BbSkeleton Class="h-3 w-[100px]"/>
-                                <BbSkeleton Class="h-3 w-[180px]"/>
-                                <BbSkeleton Class="h-3 w-[140px]"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </BbScrollArea>
-        }
+    @* Left Rail - Icon Sidebar *@
+    <div class="flex flex-col items-center py-3 gap-1 h-full bg-muted/30 border-r w-12 shrink-0">
+        <BbTooltip>
+            <BbTooltipTrigger>
+                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8 text-primary">
+                    <LucideIcon Name="inbox" class="h-4 w-4"/>
+                </BbButton>
+            </BbTooltipTrigger>
+            <BbTooltipContent Side="PopoverSide.Right">
+                <span>Inbox (@_messages.Count)</span>
+            </BbTooltipContent>
+        </BbTooltip>
+        <BbTooltip>
+            <BbTooltipTrigger>
+                <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-8 w-8">
+                    <LucideIcon Name="file-text" class="h-4 w-4"/>
+                </BbButton>
+            </BbTooltipTrigger>
+            <BbTooltipContent Side="PopoverSide.Right">
+                <span>Templates</span>
+            </BbTooltipContent>
+        </BbTooltip>
     </div>
-</BbResizablePanel>
 
-<BbResizableHandle WithHandle="true"/>
-
-@* Right Panel - Email Detail *@
-<BbResizablePanel DefaultSize="60" MinSize="50">
-    <div class="flex flex-col h-full">
-        @* Email Header *@
-        <div class="p-4 border-b space-y-3">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <BbAvatar>
-                        <BbAvatarFallback Class="bg-blue-100 text-blue-700">SC</BbAvatarFallback>
-                    </BbAvatar>
-                    <div>
-                        <p class="text-sm font-semibold">Sarah Chen</p>
-                        <p class="text-xs text-muted-foreground">sarah.chen&#64;acmecorp.com</p>
+    @* Resizable Email List + Detail *@
+    <BbResizablePanelGroup Direction="ResizableDirection.Horizontal" Class="flex-1">
+        @* Center Panel - Email List *@
+        <BbResizablePanel DefaultSize="37" MinSize="25" MaxSize="50">
+            <div class="flex flex-col h-full">
+                <div class="p-3 space-y-3 border-b">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-semibold">Inbox</h2>
+                        <BbBadge Variant="BadgeVariant.Secondary" Class="text-xs">@_messages.Count</BbBadge>
                     </div>
+                    <BbTabs @bind-Value="_mailTab" Class="w-full">
+                        <BbTabsList Class="w-full h-8">
+                            <BbTabsTrigger Value="all" Class="text-xs flex-1">All Mail</BbTabsTrigger>
+                            <BbTabsTrigger Value="unread" Class="text-xs flex-1">Unread</BbTabsTrigger>
+                        </BbTabsList>
+                    </BbTabs>
                 </div>
-                <span class="text-xs text-muted-foreground">Jan 15, 2026, 10:32 AM</span>
-            </div>
-            <div class="flex items-center justify-between">
-                <h3 class="text-base font-semibold">Q4 Revenue Report - Final Draft</h3>
-                <div class="flex items-center gap-1">
-                    <BbButtonGroup>
-                        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                            <LucideIcon Name="reply" class="h-3.5 w-3.5"/>
-                        </BbButton>
-                        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                            <LucideIcon Name="forward" class="h-3.5 w-3.5"/>
-                        </BbButton>
-                        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                            <LucideIcon Name="archive" class="h-3.5 w-3.5"/>
-                        </BbButton>
-                    </BbButtonGroup>
-                    <BbDropdownMenu>
-                        <BbDropdownMenuTrigger>
-                            <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                                <LucideIcon Name="ellipsis-vertical" class="h-3.5 w-3.5"/>
-                            </BbButton>
-                        </BbDropdownMenuTrigger>
-                        <BbDropdownMenuContent Align="PopoverAlign.End">
-                            <BbDropdownMenuItem>
-                                <LucideIcon Name="star" class="mr-2 h-4 w-4"/>
-                                Star
-                            </BbDropdownMenuItem>
-                            <BbDropdownMenuItem>
-                                <LucideIcon Name="tag" class="mr-2 h-4 w-4"/>
-                                Add Label
-                            </BbDropdownMenuItem>
-                            <BbDropdownMenuItem>
-                                <LucideIcon Name="bell-off" class="mr-2 h-4 w-4"/>
-                                Mute Thread
-                            </BbDropdownMenuItem>
-                            <BbDropdownMenuSeparator/>
-                            <BbDropdownMenuItem Class="text-destructive focus:text-destructive">
-                                <LucideIcon Name="trash-2" class="mr-2 h-4 w-4"/>
-                                Delete
-                            </BbDropdownMenuItem>
-                        </BbDropdownMenuContent>
-                    </BbDropdownMenu>
-                </div>
-            </div>
-        </div>
 
-        @* Email Body *@
-        <BbScrollArea Class="flex-1 p-4">
-            <div class="prose prose-sm dark:prose-invert max-w-none space-y-4">
-                <p class="text-sm leading-relaxed">Hi team,</p>
-                <p class="text-sm leading-relaxed">
-                    Please find attached the final draft of the Q4 revenue report. Key highlights include a
-                    <span class="font-semibold">23% increase in recurring revenue</span> and strong performance across
-                    all product lines. The enterprise segment showed particularly strong growth.
-                </p>
-                <p class="text-sm leading-relaxed">
-                    I&apos;d like to review the key metrics in our meeting tomorrow. Please take a look at the
-                    attached charts and let me know if you have any questions or concerns before then.
-                </p>
-                <p class="text-sm leading-relaxed">
-                    Best regards,<br/>
-                    Sarah Chen<br/>
-                    <span class="text-muted-foreground">VP of Finance, Acme Corp</span>
-                </p>
+                <BbScrollArea Class="flex-1">
+                    <div class="divide-y">
+                        @if (_mailTab == "all" && _messages.Any())
+                        {
+                            @foreach (var message in _messages)
+                            {
+                                <div class="p-3 bg-accent/50 cursor-pointer">
+                                    <div class="flex items-start gap-3">
+                                        <div class="flex-1 min-w-0 space-y-1">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-sm font-semibold truncate">@message.From</span>
+                                                <span class="text-[10px] text-muted-foreground shrink-0">@message.Date</span>
+                                            </div>
+                                            <p class="text-xs font-medium truncate">@message.Subject</p>
+                                            <p class="text-xs text-muted-foreground line-clamp-1">@message.Body</p>
+                                            <div class="flex gap-1.5">
+                                                @foreach (var tag in message.Tags)
+                                                {
+                                                    <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-blue text-tag-blue-foreground hover:bg-tag-blue">@tag</BbBadge>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else if (_mailTab == "unread" && _messages.Any())
+                        {
+                            @foreach (var message in _messages)
+                            {
+                                <div class="p-3 bg-accent/50 cursor-pointer">
+                                    <div class="flex items-start gap-3">
+                                        <div class="flex-1 min-w-0 space-y-1">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-sm font-semibold truncate">@message.From</span>
+                                                <span class="text-[10px] text-muted-foreground shrink-0">@message.Date</span>
+                                            </div>
+                                            <p class="text-xs font-medium truncate">@message.Subject</p>
+                                            <p class="text-xs text-muted-foreground line-clamp-1">@message.Body</p>
+                                            <div class="flex gap-1.5">
+                                                @foreach (var tag in message.Tags)
+                                                {
+                                                    <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-blue text-tag-blue-foreground hover:bg-tag-blue">@tag</BbBadge>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else if (_isLoading)
+                        {
+                            <div class="p-3">
+                                <div class="flex items-start gap-3">
+                                    <BbSkeleton Shape="SkeletonShape.Circular" Class="h-8 w-8"/>
+                                    <div class="flex-1 space-y-2">
+                                        <BbSkeleton Class="h-3 w-[120px]"/>
+                                        <BbSkeleton Class="h-3 w-[200px]"/>
+                                        <BbSkeleton Class="h-3 w-[160px]"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3">
+                                <div class="flex items-start gap-3">
+                                    <BbSkeleton Shape="SkeletonShape.Circular" Class="h-8 w-8"/>
+                                    <div class="flex-1 space-y-2">
+                                        <BbSkeleton Class="h-3 w-[100px]"/>
+                                        <BbSkeleton Class="h-3 w-[180px]"/>
+                                        <BbSkeleton Class="h-3 w-[140px]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="flex-1 flex items-center justify-center">
+                                <BbEmpty Title="All caught up!"
+                                         Description="You have no unread messages. Enjoy the zen.">
+                                    <Icon>
+                                        <LucideIcon Name="mail-check" class="h-10 w-10"/>
+                                    </Icon>
+                                </BbEmpty>
+                            </div>
+                        }
+                    </div>
+                </BbScrollArea>
             </div>
+        </BbResizablePanel>
 
-            @* Attachment *@
-            <div class="mt-6">
-                <BbSeparator Class="mb-4"/>
-                <p class="text-xs font-medium text-muted-foreground mb-2">1 Attachment</p>
-                <div class="rounded-lg border overflow-hidden max-w-xs">
-                    <BbAspectRatio Ratio="16.0 / 9.0">
-                        <div class="w-full h-full bg-muted flex items-center justify-center">
-                            <div class="text-center">
-                                <LucideIcon Name="file-chart-column-increasing" class="h-8 w-8 text-muted-foreground mx-auto mb-1"/>
-                                <p class="text-xs text-muted-foreground">Q4-Revenue-Report.pdf</p>
-                                <p class="text-[10px] text-muted-foreground">2.4 MB</p>
+        <BbResizableHandle WithHandle="true"/>
+
+        @* Right Panel - Email Detail *@
+        <BbResizablePanel DefaultSize="60" MinSize="50">
+            <div class="flex flex-col h-full">
+                @* Email Header *@
+                <div class="p-4 border-b space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <p class="text-sm font-semibold">Sarah Chen</p>
+                                <p class="text-xs text-muted-foreground">sarah.chen&#64;acmecorp.com</p>
                             </div>
                         </div>
-                    </BbAspectRatio>
+                        <span class="text-xs text-muted-foreground">Jan 15, 2026, 10:32 AM</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base font-semibold">Q4 Revenue Report - Final Draft</h3>
+                        <div class="flex items-center gap-1">
+                            <BbDropdownMenu>
+                                <BbDropdownMenuTrigger>
+                                    <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
+                                        <LucideIcon Name="ellipsis-vertical" class="h-3.5 w-3.5"/>
+                                    </BbButton>
+                                </BbDropdownMenuTrigger>
+                                <BbDropdownMenuContent Align="PopoverAlign.End">
+                                    <BbDropdownMenuItem Class="text-destructive focus:text-destructive">
+                                        <LucideIcon Name="trash-2" class="mr-2 h-4 w-4"/>
+                                        Delete
+                                    </BbDropdownMenuItem>
+                                </BbDropdownMenuContent>
+                            </BbDropdownMenu>
+                        </div>
+                    </div>
                 </div>
+
+                @* Email Body *@
+                <BbScrollArea Class="flex-1 p-4">
+                    <div class="prose prose-sm dark:prose-invert max-w-none space-y-4">
+                        <p class="text-sm leading-relaxed">Hi team,</p>
+                        <p class="text-sm leading-relaxed">
+                            Please find attached the final draft of the Q4 revenue report. Key highlights include a
+                            <span class="font-semibold">23% increase in recurring revenue</span> and strong performance across
+                            all product lines. The enterprise segment showed particularly strong growth.
+                        </p>
+                        <p class="text-sm leading-relaxed">
+                            I&apos;d like to review the key metrics in our meeting tomorrow. Please take a look at the
+                            attached charts and let me know if you have any questions or concerns before then.
+                        </p>
+                        <p class="text-sm leading-relaxed">
+                            Best regards,<br/>
+                            Sarah Chen<br/>
+                            <span class="text-muted-foreground">VP of Finance, Acme Corp</span>
+                        </p>
+                    </div>
+
+                    @* Attachment *@
+                    <div class="mt-6">
+                        <BbSeparator Class="mb-4"/>
+                        <p class="text-xs font-medium text-muted-foreground mb-2">1 Attachment</p>
+                        <div class="rounded-lg border overflow-hidden max-w-xs">
+                            <BbAspectRatio Ratio="16.0 / 9.0">
+                                <div class="w-full h-full bg-muted flex items-center justify-center">
+                                    <div class="text-center">
+                                        <LucideIcon Name="file-chart-column-increasing" class="h-8 w-8 text-muted-foreground mx-auto mb-1"/>
+                                        <p class="text-xs text-muted-foreground">Q4-Revenue-Report.pdf</p>
+                                        <p class="text-[10px] text-muted-foreground">2.4 MB</p>
+                                    </div>
+                                </div>
+                            </BbAspectRatio>
+                        </div>
+                    </div>
+                </BbScrollArea>
             </div>
-        </BbScrollArea>
-    </div>
-</BbResizablePanel>
-</BbResizablePanelGroup>
+        </BbResizablePanel>
+    </BbResizablePanelGroup>
 </div>
 
 @* Mobile Email View (single panel) *@
@@ -521,16 +301,8 @@
             Inbox
         </BbButton>
         <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Small" Class="h-9 text-xs gap-1.5 shrink-0">
-            <LucideIcon Name="send" class="h-3.5 w-3.5"/>
-            Sent
-        </BbButton>
-        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Small" Class="h-9 text-xs gap-1.5 shrink-0">
-            <LucideIcon Name="file-pen" class="h-3.5 w-3.5"/>
-            Drafts
-        </BbButton>
-        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Small" Class="h-9 text-xs gap-1.5 shrink-0">
-            <LucideIcon Name="trash-2" class="h-3.5 w-3.5"/>
-            Trash
+            <LucideIcon Name="file-text" class="h-3.5 w-3.5"/>
+            Templates
         </BbButton>
     </div>
 
@@ -541,7 +313,7 @@
             <div class="p-3 space-y-3 border-b shrink-0">
                 <div class="flex items-center justify-between">
                     <h2 class="text-lg font-semibold">Inbox</h2>
-                    <BbBadge Variant="BadgeVariant.Secondary" Class="text-xs">12</BbBadge>
+                    <BbBadge Variant="BadgeVariant.Secondary" Class="text-xs">@_messages.Count</BbBadge>
                 </div>
                 <BbTabs @bind-Value="_mailTab" Class="w-full">
                     <BbTabsList Class="w-full h-8">
@@ -550,91 +322,70 @@
                     </BbTabsList>
                 </BbTabs>
             </div>
-            @if (_mailTab == "unread")
-            {
-                <div class="flex-1 flex items-center justify-center">
-                    <BbEmpty Title="All caught up!"
-                             Description="You have no unread messages. Enjoy the zen.">
-                        <Icon>
-                            <LucideIcon Name="mail-check" class="h-10 w-10"/>
-                        </Icon>
-                    </BbEmpty>
-                </div>
-            }
-            else
-            {
-                <div class="flex-1 min-h-0 overflow-y-auto">
-                    <div class="divide-y">
+            <div class="flex-1 min-h-0 overflow-y-auto">
+                <div class="divide-y">
+                    @if (_mailTab == "all" && _messages.Any())
+                    {
+                        @foreach (var message in _messages)
+                        {
+                            <div class="p-3 bg-accent/50 cursor-pointer" @onclick="() => _mobileShowDetail = true">
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1 min-w-0 space-y-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm font-semibold truncate">@message.From</span>
+                                            <span class="text-[10px] text-muted-foreground shrink-0">@message.Date.ToString("HH:mm")</span>
+                                        </div>
+                                        <p class="text-xs font-medium truncate">@message.Subject</p>
+                                        <p class="text-xs text-muted-foreground line-clamp-1">@message.Body</p>
+                                        <div class="flex gap-1.5">
+                                            @foreach (var tag in message.Tags)
+                                            {
+                                                <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-blue text-tag-blue-foreground hover:bg-tag-blue">@tag</BbBadge>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else if (_mailTab == "unread" && _unreadMessages.Any())
+                    {
+                        @foreach (var message in _unreadMessages)
+                        {
+                            <div class="p-3 bg-accent/50 cursor-pointer" @onclick="() => _mobileShowDetail = true">
+                                <div class="flex items-start gap-3">
+                                    <div class="flex-1 min-w-0 space-y-1">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm font-semibold truncate">@message.From</span>
+                                            <span class="text-[10px] text-muted-foreground shrink-0">@message.Date.ToString("HH:mm")</span>
+                                        </div>
+                                        <p class="text-xs font-medium truncate">@message.Subject</p>
+                                        <p class="text-xs text-muted-foreground line-clamp-1">@message.Body</p>
+                                        <div class="flex gap-1.5">
+                                            @foreach (var tag in message.Tags)
+                                            {
+                                                <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-blue text-tag-blue-foreground hover:bg-tag-blue">@tag</BbBadge>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
                         <div class="p-3 bg-accent/50 cursor-pointer" @onclick="() => _mobileShowDetail = true">
                             <div class="flex items-start gap-3">
-                                <BbAvatar Size="AvatarSize.Small">
-                                    <BbAvatarFallback Class="bg-blue-100 text-blue-700 text-xs">SC</BbAvatarFallback>
-                                </BbAvatar>
                                 <div class="flex-1 min-w-0 space-y-1">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-sm font-semibold truncate">Sarah Chen</span>
-                                        <span class="text-[10px] text-muted-foreground shrink-0">10:32 AM</span>
-                                    </div>
-                                    <p class="text-xs font-medium truncate">Q4 Revenue Report - Final Draft</p>
-                                    <p class="text-xs text-muted-foreground line-clamp-1">Hi team, please find attached the final draft of the Q4 revenue report...</p>
-                                    <div class="flex gap-1.5">
-                                        <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-blue text-tag-blue-foreground hover:bg-tag-blue">Work</BbBadge>
-                                        <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-red text-tag-red-foreground hover:bg-tag-red">Important</BbBadge>
+                                        <span class="text-sm font-semibold truncate">No unread messages</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-3 hover:bg-accent/30 cursor-pointer transition-colors" @onclick="() => _mobileShowDetail = true">
-                            <div class="flex items-start gap-3">
-                                <BbAvatar Size="AvatarSize.Small">
-                                    <BbAvatarFallback Class="bg-green-100 text-green-700 text-xs">MR</BbAvatarFallback>
-                                </BbAvatar>
-                                <div class="flex-1 min-w-0 space-y-1">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-sm font-semibold truncate">Marcus Rivera</span>
-                                        <span class="text-[10px] text-muted-foreground shrink-0">9:15 AM</span>
-                                    </div>
-                                    <p class="text-xs font-medium truncate">Sprint Planning - Action Items</p>
-                                    <p class="text-xs text-muted-foreground line-clamp-1">Following up on our sprint planning meeting, here are the key action items...</p>
-                                    <div class="flex gap-1.5">
-                                        <BbBadge Class="text-[10px] px-1.5 py-0 h-4 bg-tag-blue text-tag-blue-foreground hover:bg-tag-blue">Work</BbBadge>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-3 hover:bg-accent/30 cursor-pointer transition-colors" @onclick="() => _mobileShowDetail = true">
-                            <div class="flex items-start gap-3">
-                                <BbAvatar Size="AvatarSize.Small">
-                                    <BbAvatarFallback Class="bg-purple-100 text-purple-700 text-xs">EW</BbAvatarFallback>
-                                </BbAvatar>
-                                <div class="flex-1 min-w-0 space-y-1">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-sm truncate">Emma Wilson</span>
-                                        <span class="text-[10px] text-muted-foreground shrink-0">Yesterday</span>
-                                    </div>
-                                    <p class="text-xs truncate">Design Review Feedback</p>
-                                    <p class="text-xs text-muted-foreground line-clamp-1">Great work on the new designs! I have a few suggestions for the landing page...</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-3 hover:bg-accent/30 cursor-pointer transition-colors" @onclick="() => _mobileShowDetail = true">
-                            <div class="flex items-start gap-3">
-                                <BbAvatar Size="AvatarSize.Small">
-                                    <BbAvatarFallback Class="bg-amber-100 text-amber-700 text-xs">JK</BbAvatarFallback>
-                                </BbAvatar>
-                                <div class="flex-1 min-w-0 space-y-1">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-sm truncate">James Kim</span>
-                                        <span class="text-[10px] text-muted-foreground shrink-0">Yesterday</span>
-                                    </div>
-                                    <p class="text-xs truncate">Team Lunch - Friday</p>
-                                    <p class="text-xs text-muted-foreground line-clamp-1">Hey everyone! Let's do a team lunch this Friday. I was thinking Italian...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
-            }
+            </div>
         </div>
     }
     else
@@ -647,18 +398,12 @@
                         <LucideIcon Name="arrow-left" class="h-4 w-4"/>
                     </BbButton>
                     <div class="flex items-center gap-3 flex-1 min-w-0">
-                        <BbAvatar Size="AvatarSize.Small">
-                            <BbAvatarFallback Class="bg-blue-100 text-blue-700 text-xs">SC</BbAvatarFallback>
-                        </BbAvatar>
                         <div class="min-w-0">
                             <p class="text-sm font-semibold truncate">Sarah Chen</p>
                             <p class="text-[10px] text-muted-foreground truncate">sarah.chen&#64;acmecorp.com</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-1 shrink-0">
-                        <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
-                            <LucideIcon Name="reply" class="h-3.5 w-3.5"/>
-                        </BbButton>
                         <BbButton Variant="ButtonVariant.Ghost" Size="ButtonSize.Icon" Class="h-7 w-7">
                             <LucideIcon Name="trash-2" class="h-3.5 w-3.5"/>
                         </BbButton>
@@ -711,4 +456,99 @@
 @code {
     private string _mailTab = "all";
     private bool _mobileShowDetail;
+    private bool _isLoading;
+    private readonly List<Message> _messages = new();
+    private IEnumerable<Message> _unreadMessages => _messages.Where(m => !m.IsRead);
+
+    protected override async Task OnInitializedAsync()
+    {
+        _isLoading = true;
+        _messages.AddRange([
+            new Message
+            {
+                Id = "1",
+                Subject = "Q4 Revenue Report - Final Draft",
+                Body = """
+                       <p class="text-sm leading-relaxed">Hi team,</p>
+                        <p class="text-sm leading-relaxed">
+                            Please find attached the final draft of the Q4 revenue report. Key highlights include a
+                            <span class="font-semibold">23% increase in recurring revenue</span> and strong performance across
+                            all product lines. The enterprise segment showed particularly strong growth.
+                        </p>
+                        <p class="text-sm leading-relaxed">
+                            I&apos;d like to review the key metrics in our meeting tomorrow. Please take a look at the
+                            attached charts and let me know if you have any questions or concerns before then.
+                        </p>
+                        <p class="text-sm leading-relaxed">
+                            Best regards,<br/>
+                            Sarah Chen<br/>
+                            <span class="text-muted-foreground">VP of Finance, Acme Corp</span>
+                        </p>
+                       """,
+                From = "sarah_chen@test.com",
+                To = "dev@test.com",
+                Cc = "",
+                Bcc = "",
+                IsRead = true,
+                Date = DateTime.Now,
+                Tags = ["Work", "Important"],
+                Attachments = [new Attachment { Name = "Q4-Revenue-Report.pdf", Size = 2400 * 1024 }]
+            },
+            new Message
+            {
+                Id = "2",
+                Subject = "Sprint Planning - Action Items",
+                Body = "Following up on our sprint planning meeting, here are the key action items for the next sprint:<br/><br/>* Complete API authentication module (John)<br/>* Implement database schema (Jane)<br/>* Set up CI/CD pipeline (Mike)<br/><br/>Please review and confirm by EOD. Thanks!",
+                From = "marcus_rivera@test.com",
+                To = "dev@test.com",
+                Cc = "",
+                Bcc = "",
+                IsRead = false,
+                Date = DateTime.Now,
+                Tags = ["Work"],
+                Attachments = []
+            },
+            new Message
+            {
+                Id = "3",
+                Subject = "Design Review Feedback",
+                Body = "Great work on the new designs! I have a few suggestions for the landing page hero section. Could we make the call to action button more prominent? Also, consider adding a short video to showcase the product in action. I've attached a few examples for inspiration. Let me know your thoughts!",
+                From = "emma_wilson@test.com",
+                To = "dev@test.com",
+                Cc = "",
+                Bcc = "",
+                IsRead = false,
+                Date = DateTime.Now,
+                Tags = ["Work"],
+                Attachments = []
+            }
+        ]);
+        await Task.Delay(1000);
+        _isLoading = false;
+    }
+
+    private class Message
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Subject { get; set; } = string.Empty;
+        public string Body { get; set; } = string.Empty;
+        public string From { get; set; } = string.Empty;
+        public string To { get; set; } = string.Empty;
+        public string Cc { get; set; } = string.Empty;
+        public string Bcc { get; set; } = string.Empty;
+        public bool IsRead { get; set; } = false;
+        public DateTime Date { get; set; } = DateTime.Now;
+        public List<string> Tags { get; set; } = new();
+        public List<Attachment> Attachments { get; set; } = new();
+    }
+
+    private class Attachment
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string ContentType { get; set; } = string.Empty;
+        public long Size { get; set; } = 0;
+        public byte[] Content { get; set; } = Array.Empty<byte>();
+    }
+
 }

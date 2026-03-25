@@ -1,0 +1,6 @@
+@LocalMails.Server_HostAddress = http://localhost:5004
+
+GET {{LocalMails.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
